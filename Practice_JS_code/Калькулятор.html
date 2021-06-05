@@ -1,0 +1,100 @@
+<html>
+	<head>
+        <style>
+            #calculator {
+    border:  1px solid black; /* Универсальное свойство border позволяет одновременно установить толщину, стиль и цвет границы вокруг элемента. */
+    height:  200px;             /* Устанавливает высоту блочных или заменяемых элементов. */
+    padding: 5px;               /* Устанавливает значение полей вокруг содержимого элемента. */
+    width:   200px;             /* Устанавливает ширину блочных или заменяемых элементов */
+}
+    #calculator button {
+        background-color: white;           /* Определяет цвет фона элемента. */
+        border:           1px solid black; /* Универсальное свойство border позволяет одновременно установить толщину, стиль и цвет границы вокруг элемента. */
+        transition:       .1s ease-in-out;   /* добавим плавность переходов для всех элементов страницы*/
+    }
+    #calculator button:hover {     /* Определяет стиль элемента при наведении на него курсора мыши, но при этом элемент еще не активирован, иными словами кнопка мыши не нажата. */
+        background-color: black; /* Определяет цвет фона элемента. */
+        color:            white; /* Определяет цвет текста элемента. */
+    }
+    #calculatorDisplay {
+        border:          1px solid black; /* Универсальное свойство border позволяет одновременно установить толщину, стиль и цвет границы вокруг элемента. */
+        display:         flex;              /* Многоцелевое свойство, которое определяет, как элемент должен быть показан в документе. */
+        flex-direction:  row;               /* Свойство flex-direction задаёт направление основных осей в контейнере и тем самым определяет положение флексов в контейнере. */
+        height:          30px;              /* Устанавливает высоту блочных или заменяемых элементов. */
+        justify-content: space-between;     /* Определяет, как браузер распределяет пространство вокруг флекс-элементов вдоль главной оси контейнера. */
+        padding:         2px;               /* Устанавливает значение полей вокруг содержимого элемента. */
+    }
+        #clear {
+            height: 30px; /* Устанавливает высоту блочных или заменяемых элементов. */
+            width:  30px; /* Устанавливает ширину блочных или заменяемых элементов */
+        }
+        #output {
+            border:     0px;    /* Универсальное свойство border позволяет одновременно установить толщину, стиль и цвет границы вокруг элемента. */
+            color:      gray; /* Определяет цвет текста элемента. */
+            padding:    2px;    /* Устанавливает значение полей вокруг содержимого элемента. */
+            text-align: right;  /* Определяет горизонтальное выравнивание текста в пределах элемента. */
+        }
+    #inputPanel {
+        padding-top: 5px;    /* Устанавливает значение поля от верхнего края содержимого элемента. */
+        text-align:  center; /* Определяет горизонтальное выравнивание текста в пределах элемента. */
+    }
+        #inputPanel button{
+            height: 19%; /* Устанавливает высоту блочных или заменяемых элементов. */
+            margin: 1px; /* Устанавливает величину отступа от каждого края элемента. */
+            width:  22%; /* Устанавливает ширину блочных или заменяемых элементов */
+        }
+        </style>
+		<meta charset="utf-8">
+        <title>Это заголовок тайтл</title>
+    </head>
+	<body>
+        <div id="calculator">
+            <div id="calculatorDisplay">
+                <button id="clear">C</button>
+                <input id="output" readonly>
+            </div>
+            <div id="inputPanel">
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button>/</button>
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button>*</button>
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>-</button>
+                <button>.</button>
+                <button>0</button>
+                <button value='='>=</button>
+                <button>+</button>
+            </div>
+        </div>
+        <script>
+            let output = document.getElementById('output');
+            output.value = '';
+
+            let clear = document.getElementById('clear');
+            clear.addEventListener('click', remove);
+
+            function remove() {
+                output.value = '';
+            }
+
+            let inputPanel = document.getElementById('inputPanel');
+            let buttons = inputPanel.childNodes;
+            for(var i = 0; i < buttons.length; i++) {
+                buttons[i].addEventListener('click', func);
+            }
+
+            function func() {
+                if(this.value == '=')
+                    output.value = eval(output.value);
+                else
+                    output.value += this.innerHTML;
+            }
+            </script>
+    </body>
+</html>

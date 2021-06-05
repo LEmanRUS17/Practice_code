@@ -1,0 +1,112 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>Java Script</title>
+    </head>
+    <style>
+        div {
+            width: 300px;
+            border: 1px solid black;
+        }
+        #taskText {
+            width: 294px;
+        }
+        input {
+            margin: 3px;
+            border: 1px solid black;
+        }
+        .closeButton {
+            border: 1px solid red;
+            color: red;
+            background-color: white;
+            border-radius: 50%;
+            font-weight: bolder;
+            font-size: 14px;
+        }
+        .crossedOut {
+            text-decoration: line-through;
+        }
+    </style>
+	<body>
+        <div id='Main'>
+            <div id="taskInput">
+                <input id="taskText" type="text" placeholder="Введите задачу">
+            </div>
+        </div>
+        
+        <script>
+            var main = document.getElementById('Main');
+            var taskText = document.getElementById('taskText');
+            taskText.addEventListener('keydown', function() {
+                if(event.keyCode == 13) {
+                    newQuestion(taskText.value);
+                }
+            });
+
+            function newQuestion(text) {
+                let elem = document.createElement('div');
+
+                mark(elem);
+                questionText(elem, text);
+                addCloseButton(elem);
+
+                main.appendChild(elem);
+            }
+
+            function mark(id) {
+                let elem = document.createElement('input');
+                elem.type = 'checkbox';
+                id.appendChild(elem);
+
+                elem.addEventListener('click', crossOutTheQuestion);
+            }
+                function crossOutTheQuestion() {
+                    let text = this.nextSibling;
+                    text.className = 'crossedOut';
+                    this.disabled = true;
+                }
+
+            function questionText(id, text) {
+                let elem = document.createElement('span');
+                elem.innerHTML = text;
+                id.appendChild(elem);
+
+                elem.addEventListener('dblclick', editText);
+            }
+                function editText() {
+                    this.removeEventListener('dblclick', editText);
+                    let elem = document.createElement('input');
+                    elem.type = 'text';
+                    elem.value = this.innerHTML;
+
+                    this.innerHTML = '';
+                    this.appendChild(elem);
+
+                    let parent = this;
+                    elem.addEventListener('keydown', function() {
+                        if(event.keyCode == 13) {
+                            finishEditing(parent, elem.value);
+                        }
+                    });
+                }
+                    function finishEditing(id, text) {
+                        id.innerHTML = text;
+                    }
+
+            function addCloseButton(id) {
+                let elem = document.createElement('button');
+                elem.className = 'closeButton';
+                elem.innerHTML = 'x';
+                id.appendChild(elem);
+
+                elem.addEventListener('click', close);
+            }
+                function close() {
+                    let elem = this.parentElement;
+                    elem.remove();
+                }
+
+
+        </script>
+    </body>
+</html>

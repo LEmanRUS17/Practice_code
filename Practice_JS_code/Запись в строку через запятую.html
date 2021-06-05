@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>Это заголовок тайтл</title>
+	</head>
+	<body>
+        <input type="text" value="" placeholder="Введите страну">
+        <p></p>
+        <script>
+            var country = document.querySelector('input'); // document.querySelector() // document.querySelector() возвращает первый элемент в документе (объект Element), соответствующий указанному селектору, или группе селекторов.
+            var list    = document.querySelector('p');     // document.querySelector() // document.querySelector() возвращает первый элемент в документе (объект Element), соответствующий указанному селектору, или группе селекторов.
+            var arr     = [];
+
+            addEventListener('keydown', func); // EventTarget.addEventListener() // addEventListener() объекта EventTarget позволяет зарегистрировать обработчик событий определенного типа для конкретной цели.
+
+            function func() {
+                var code = event.keyCode;
+                console.log(code);
+                if(code == 13) {
+                    arr.push(del_spaces(country)); // push() // push() позволяет добавить один, или более элементов в конец массива. После вызова (добавления элементов) возвращает значение соответствуюшее длине массива.
+                    list.innerHTML = arr;
+                    country.value  = ''; 
+                }
+            }
+
+            // Функция удаления пробелов
+            function del_spaces(str)
+            {
+                str = str.value.replace(/\s/g, ''); // replace() // replace() выполняет внутри строки поиск с использованием регулярного выражения (объект RegExp), или строкового значения и возвращает новую строку, в которой будут заменены найденные значения.
+                return str;
+            }
+        </script>
+    </body>
+</html>

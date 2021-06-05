@@ -1,0 +1,240 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>Java Script</title>
+    </head>
+    <style>
+        #parent {
+            text-align: center;
+        }
+        #calendar {
+            display: inline-block;
+        }
+        #calendar td, #calendar th {
+            padding: 10px;
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        #calendar .nav, #calendar .info {
+            text-align: center;
+        }
+        #calendar a {
+            color: blue;
+            font-size: 25px;
+            text-decoration: none;
+        }
+        #calendar a:hover {
+            color: red;
+        }
+
+        #calendar .active {
+            color: red;
+        }
+    </style>
+	<body>
+        <div id="parent">
+            <div id="calendar">
+                <div class="info">Янв 2020</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>пн</th>
+                            <th>вт</th>
+                            <th>ср</th>
+                            <th>чт</th>
+                            <th>пт</th>
+                            <th>сб</th>
+                            <th>вс</th>
+                        </tr>
+                    </thead>
+                    <tbody class="body"></tbody>
+                </table>
+                <div class="nav">
+                    <a href="#" class="prev">←</a>
+                    <a href="#" class="next">→</a>
+                </div>
+            </div>
+        </div>
+        <script>
+            var stringYearMonth = document.querySelector('.info');
+            
+            var calendar = document.querySelector('#calendar');
+            var body = calendar.querySelector('.body');
+
+            var prev = calendar.querySelector('.prev');
+            var next = calendar.querySelector('.next');
+
+            var date  = new Date();
+            var year  = date.getFullYear();
+            var month = date.getMonth();
+
+            // Получить следующий месяц
+            next.addEventListener('click', function() {
+                year = getNextYear(year, month); // Получить год
+                month = getNextMonth(month);     // Получить месяц
+
+                draw(body, year, month, stringYearMonth); // выполнение главной функции
+            });
+
+            // Получить прошлый месяц
+            prev.addEventListener('click', function() {
+                year = getPrevYear(year, month); // Получить год
+                month = getPrevMonth(month);     // Получить месяц
+
+                draw(body, year, month, stringYearMonth); // выполнение главной функции
+            });
+
+            draw(body, year, month, stringYearMonth); // выполнение главной функции
+
+            // Составить календарик на месяц
+            function draw(body, year, month, stringYearMonth) {
+                
+                displayYearMonth(year, month, stringYearMonth); // вывод года и месяца строкой
+
+                var arr = range(getLastDay(year, month)); // количество дней в месяце
+
+                var firstWeekDay = getFirstWeekDay(year, month); // номер дня недели для первого дня месяца
+                var lastWeekDay  = getLastWeekDay(year, month);  // номер дня недели для последнего дня месяца
+
+                var nums = chunk(normalize(arr, firstWeekDay, 6 - lastWeekDay), 7); // преобразование массива в двумерный
+                createTable(body, nums); // заполнение календаря                
+            }
+
+            // Функция принимает целое число и создает массив чисел от 1 до этого числа
+            function range(count) {
+                var arr = [];
+                
+                for (var i = 1; i <= count; i++) {
+                    arr.push(i);
+                }
+                
+                return arr;
+            }
+            
+            // Функция возвращает номер последнего дня месяца
+            function getLastDay(year, month) {
+                var date = new Date(year, month + 1, 0);
+                return date.getDate();
+            }
+
+            // Функция получает номер для недели первого дня месяца
+            function getFirstWeekDay(year, month) {
+                var date = new Date(year, month, 1);
+                var num  = date.getDay();
+                
+                if (num == 0) {
+                    return 6;
+                } else {
+                    return num - 1;
+                }
+            }
+
+            // Функция получает номер для недели последнего дня месяца
+            function getLastWeekDay(year, month) {
+                var date = new Date(year, month + 1, 0);
+                var num  = date.getDay();
+                
+                if (num == 0) {
+                    return 6;
+                } else {
+                    return num - 1;
+                }
+            }
+
+            // Функция дополняет массив пустыми строками справа и слева.
+            function normalize(arr, left, right) {
+                for (var i = 0; i < left; i++) {
+                    arr.unshift('');
+                }
+                for (var i = 0; i < right; i++) {
+                    arr.push('');
+                }
+                
+                return arr;
+            }
+
+            // Функция разобивает массив в двухмерный
+            function chunk(arr, n) {
+                var result = [];
+                var count = Math.ceil(arr.length / n);
+                
+                for (var i = 0; i < count; i++) {
+                    var elems = arr.splice(0, n);
+                    result.push(elems);
+                }
+                
+                return result;
+            }
+
+            // Функция вносит массив в таблицу
+            function createTable(parent, arr) {
+                parent.innerHTML = '';
+                var cells = [];
+                
+                for (var sub of arr) {
+                    var tr = document.createElement('tr');
+                    
+                    for (var num of sub) {
+                        var td = document.createElement('td');
+                        if(td.innerHTML != '') {
+                            td.className = 'day';
+                        } else {
+                            td.className = 'dayOther';
+                        }
+                        td.innerHTML = num;
+                        tr.appendChild(td);
+                        
+                        cells.push(td);
+                    }
+                    
+                    parent.appendChild(tr);
+                }
+                
+                return cells;
+            }
+
+            // Функция выводит год и месяц строкой
+            function displayYearMonth(year, month, stringYearMonth) {
+                var monthes = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+                stringYearMonth.innerHTML = year + ' ' + monthes[month];
+            }
+
+            // Функция получает следующий год
+            function getNextYear(year, month) {
+                if(month == 11) {
+                    return year + 1;
+                } else {
+                    return year;
+                }
+            }
+
+            // Функция получает следующий месяч
+            function getNextMonth(month) {
+                if(month == 11) {
+                    return 0;
+                } else {
+                    return month + 1;
+                }
+            }
+
+            // Функция получает прошлый год
+            function getPrevYear(year, month) {
+                if(month == 0) {
+                    return year - 1;
+                } else {
+                    return year;
+                }
+            }
+
+            // Функция получает прошлый месяц
+            function getPrevMonth(month) {
+                if(month == 0) {
+                    return 11;
+                } else {
+                    return month - 1;
+                }
+            }
+        </script>
+    </body>
+</html>

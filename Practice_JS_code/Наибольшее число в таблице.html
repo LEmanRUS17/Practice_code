@@ -1,0 +1,46 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>Это заголовок тайтл</title>
+	</head>
+	<body>
+        <table border='1'>
+            <tr>
+                <td>32475</td>
+                <td>6546</td>
+                <td>6342</td>
+                <td>6234</td>
+                <td>62324</td>
+                <td>62534</td>
+            </tr>
+            <tr>
+                <td>6571</td>
+                <td>47648</td>
+                <td>7657</td>
+                <td>45668</td>
+                <td>7657</td>
+                <td>9448</td>
+            </tr>
+        </table>
+        <button>Ok</button>
+        <script>
+            var table = document.querySelectorAll('td');  // document.querySelectorAll() // document.querySelectorAll() возвращает список элементов в пределах документа (статичный (не живой) объект типа NodeList), соответствующих указанному селектору, или группе селекторов.
+            var but   = document.querySelector('button'); // document.querySelector() // document.querySelector() возвращает первый элемент в документе (объект Element), соответствующий указанному селектору, или группе селекторов.
+            
+            but.addEventListener('click', func); // EventTarget.addEventListener() // addEventListener() объекта EventTarget позволяет зарегистрировать обработчик событий определенного типа для конкретной цели.
+            
+            var max = 0;
+            var a   = 0;
+            
+            function func() {
+                for(i = 0; i < table.length; i++) {
+                    if(+table[i].innerHTML > max) {
+                        max = +table[i].innerHTML;
+                        a = i;
+                    }
+                }
+                table[a].style.backgroundColor = 'red';
+            }
+        </script>
+    </body>
+</html>

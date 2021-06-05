@@ -1,0 +1,176 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>Java Script</title>
+    </head>
+    <style>
+        td {
+            width: 50px;
+            height: 50px;
+            border: 1px solid black;
+            text-align: center;
+            
+        }
+    </style>
+	<body>
+        <div id="playingField">
+            <button id="start">Начать</button>
+            <p>Начиная с "1" нажимайте на числа до тех пор, пока не дойдете до последнего</p>
+        </div>
+        <script>
+            var playingField = document.getElementById('playingField');
+            var start = document.getElementById('start');
+            start.addEventListener('click', startTheGame);
+
+            var flag = 1;
+
+            // начать игру
+            function startTheGame() {
+                var rows = 5;    // количество строк
+                var columns = 5; // количество столбцов
+
+                flag = 1;
+
+                playingField.innerHTML = ''; // очистить игрровое поле
+
+                informationOutput(playingField);
+                timer();
+
+                playingАieldАrray = createTable(playingField, rows, columns); // создать игровое поле
+                arrayOfValues = arrayOfRandomValues(1, rows * columns);       // сгенирировать значения
+                fillTheArray(playingАieldАrray, arrayOfValues);               // заполнить игровое поле
+
+                cellStyleGenesis(playingАieldАrray); // изменить стиль ячейки
+
+                for(var i = 0; i < playingАieldАrray.length; i++) {
+                    playingАieldАrray[i].addEventListener('click', function() {
+                        var cell = this;
+                        makeMove(cell, rows * columns);
+                    });
+                }
+
+                addRestartButton(playingField); // создать кнопку перезапуска                
+            }
+
+            // выполнить ход
+            function makeMove(cell, num) {
+                if(cell.innerHTML == flag) {
+                    cell.style.backgroundColor = 'red';
+                    if(flag == num) {
+                        victory();
+                    }
+                    flag++;
+                }
+            }
+
+            function timer() {
+                var num = 75;
+                id = setInterval(function() {
+                    var time = document.getElementById('time');
+                    time.innerHTML = num;
+                    num--;
+                    if(num < 0) {
+                        defeat(id);
+                    }
+                }, 1000);
+            }
+
+            // победа
+            function victory() {
+                var span = document.getElementById('info');
+                span.innerHTML = 'Вы выиграли';
+            }
+
+            // поражение
+            function defeat() {
+                var span = document.getElementById('info');
+                span.innerHTML = 'Вы проиграли';
+                clearInterval(id);
+            }
+
+            // генирация игровой области
+            function createTable(parent, rows, columns) {
+                var arr = [];
+                var table = document.createElement('table');
+                for(var i = 0; i < rows; i++) {
+                    var tr = document.createElement('tr');
+                    for(var j = 0; j < columns; j++) {
+                        var td = document.createElement('td');
+                        tr.appendChild(td);
+                        arr.push(td);
+                    }
+                    table.appendChild(tr);
+                }
+                table.id = 'playingField';
+                parent.appendChild(table);
+                return arr;
+            }
+
+            // массив рандомных значений
+            function arrayOfRandomValues(min, max) {
+                arr = range(min, max);
+                shuffle(arr);
+                return arr;
+            }
+
+            // создать массив от min до max
+            function range(min, max) {
+                var arr = [];
+                for(var i = min; i <= max; i++) {
+                    arr.push(i);
+                }
+                return arr;
+            }
+
+            // Перемешать массив
+            function shuffle(array) {
+                array.sort(() => Math.random() - 0.5);
+            }
+
+            // заполнить массив
+            function fillTheArray(arrayField, arrayValue) {
+                for(var i = 0; i < arrayField.length; i++) {
+                    arrayField[i].innerHTML = arrayValue[i];
+                }
+            }
+
+            // добавить кнопку перезагрузки
+            function addRestartButton(parent) {
+                var btn = document.createElement('button');
+                btn.innerHTML = 'Начать с начала';
+                parent.appendChild(btn);
+                btn.addEventListener('click', reload);                
+            }
+
+            // перезагрузить игру
+            function reload() {
+                startTheGame();
+            }
+
+            // поле вывода информации
+            function informationOutput(parent) {
+                var span = document.createElement('span');
+                span.innerHTML = 'Времени осталось: ';
+                span.id = 'info';
+                parent.appendChild(span);
+                var time = document.createElement('span');
+                time.id = 'time';
+                span.appendChild(time);
+            }
+
+            //генирация стиля ячейки
+            function cellStyleGenesis(arr) {
+                for(var i = 0; i < arr.length; i++) {
+                    arr[i].style.fontSize = String(getRandomArbitrary(15, 35));
+                    arr[i].style.color    = String(getRandomArbitrary(1, 999999));
+                }
+            }
+
+            // Получение случайного числа в заданном интервале
+            function getRandomArbitrary(min, max) {
+                let num = Math.random() * (max - min) + min;
+                return  num.toFixed();
+            }
+        </script>
+    </body>
+</html>

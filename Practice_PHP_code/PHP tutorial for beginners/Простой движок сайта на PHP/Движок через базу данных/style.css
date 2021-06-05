@@ -1,0 +1,8 @@
+header a {
+    margin: 0 5px;
+    color: blue;
+    text-decoration: none;
+}
+header a.active {
+    text-decoration: underline;
+}

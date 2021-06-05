@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>Это заголовок тайтл</title>
+        <style>
+            img {
+                width: 50%;
+            }
+        </style>
+    </head>
+	<body>
+        <img src="images/1.jpg">
+        <img src="images/2.jpg">
+        <img src="images/3.jpg">
+        <script>
+        var images = document.getElementsByTagName('img'); // document.getElementsByTagName() // document.getElementsByTagName() возвращает коллекцию всех элементов документа с указанным именем тега в виде объекта HTMLCollection.
+        for(var i = 0; i < images.length; i++) {
+            images[i].addEventListener('click', func); // EventTarget.addEventListener() // addEventListener() объекта EventTarget позволяет зарегистрировать обработчик событий определенного типа для конкретной цели.
+        }
+        
+        function func() {
+            this.height = this.height * 2;
+            this.removeEventListener('click', func); // EventTarget.removeEventListener() // removeEventListener() объекта EventTarget позволяет удалить обработчик событий определенного типа для конкретной цели, который был установлен с использованием метода addEventListener().
+            this.addEventListener('click', reback);  // EventTarget.addEventListener() // addEventListener() объекта EventTarget позволяет зарегистрировать обработчик событий определенного типа для конкретной цели.
+        }
+
+        function reback() {
+            this.height = this.height / 2;
+            this.removeEventListener('click', reback); // EventTarget.removeEventListener() // removeEventListener() объекта EventTarget позволяет удалить обработчик событий определенного типа для конкретной цели, который был установлен с использованием метода addEventListener().
+            this.addEventListener('click', func);      // EventTarget.addEventListener() // addEventListener() объекта EventTarget позволяет зарегистрировать обработчик событий определенного типа для конкретной цели.
+        }
+        </script>
+    </body>
+</html>

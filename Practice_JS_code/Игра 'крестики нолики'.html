@@ -1,0 +1,161 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>Это заголовок тайтл</title>
+    </head>
+        <style>
+            #filed td {
+                border:      1px solid black;
+                width:       50px;
+                height:      50px;
+                text-align:  center;
+                font-weight: bold;
+            }
+        </style>
+        <table id="filed">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+        <button id="restart">Restart game</button>
+
+        <p>Next step: <span id="current-gamer"></span></p>
+	<body>
+        
+        <script>
+            var restartButton = document.querySelector('#restart');
+            restartButton.addEventListener('click', restartGame);
+
+            var currentGamerElem = document.querySelector('#current-gamer');
+
+            var cells = getFieldCells('#filed td');
+            var currentGamer = 'X';
+            prepareField();
+
+            function prepareField() {
+                activateCells(cells);
+                showCurrentGamer(currentGamer, currentGamerElem);
+            }
+
+            function nextStep() {
+                var cell = this;
+
+                fillCell(cell, currentGamer);
+                currentGamer = getNextGamer(currentGamer);                
+                
+                showCurrentGamer(currentGamer, currentGamerElem);
+                
+                deactivateCell(cell);
+
+                var winner = chekWin(cells);
+                if(winner !== false || isFieldFilled(cells)) {
+                    endGame(cells, winner, currentGamerElem);
+                }
+            }
+
+            function endGame(cells, winner, currentGamerElem) {
+                stopGame(cells);
+                showWinner(winner);
+                showCurrentGamer('-', currentGamerElem);
+            }
+
+            function restartGame() {
+                prepareField();
+            }
+
+            function getNextGamer(currentGamer) {
+                if(currentGamer == 'X') {
+                    return 'O';
+                } else {
+                    return 'X';
+                }
+            }
+
+            function fillCell(cell, content) {
+                cell.innerHTML = content;
+            }
+
+            function deactivateCell(cell) {
+                cell.removeEventListener('click', nextStep);
+            }
+
+            function activateCells(cell) {
+                for (var i = 0; i < cells.length; i++) {
+                    cells[i].innerHTML = '';
+                    cells[i].addEventListener('click', nextStep);
+                }
+            }
+
+            function getFieldCells(selector) {
+                return document.querySelectorAll(selector);
+            }
+
+            function stopGame(cells) {
+                for (var i = 0; i < cells.length; i++) {
+                    cells[i].removeEventListener('click', nextStep);
+                }
+            }
+
+            function showWinner(winner) {
+                if (winner !== false) {
+                    alert(winner);
+                } else {
+                    alert('draw game');
+                }                
+            }
+
+            function showCurrentGamer(name, elem) {
+                elem.innerHTML = name;
+            }
+
+            function chekWin(cells) {
+                var winningCombination = [
+                    [0, 1, 2],
+                    [3, 4, 5],
+                    [6, 7, 8],
+                    [0, 3, 6],
+                    [1, 4, 7],
+                    [2, 5, 8],
+                    [0, 4, 8],
+                    [2, 4, 6]
+                ];
+                for(var i = 0; i < winningCombination.length; i++) {
+                    var wc = winningCombination[i];
+                    if (
+                        cells[wc[0]].innerHTML == cells[wc[1]].innerHTML &&
+                        cells[wc[1]].innerHTML == cells[wc[2]].innerHTML &&
+                        cells[wc[0]].innerHTML !=''
+                    ) {
+                        return cells[wc[0]].innerHTML;
+                    }
+                }
+
+                return false;
+                
+            }
+
+            function isFieldFilled(cells) {
+                for (var i = 0; i < cells.length; i++) {
+                    if(cells[i].innerHTML == '') {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        </script>
+    </body>
+</html>

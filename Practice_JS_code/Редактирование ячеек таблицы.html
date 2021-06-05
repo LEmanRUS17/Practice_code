@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>Это заголовок тайтл</title>
+        <style>
+            td, input, button {
+                width: 100px;
+                text-align: center;
+            }
+        </style>
+    </head>
+	<body>
+        <table border='1'>
+            <tr>
+                <td>24</td>
+                <td>54</td>
+                <td>34</td>
+                <td>23</td>
+                <td>26</td>
+                <td>25</td>
+            </tr>
+            <tr>
+                <td>53</td>
+                <td>56</td>
+                <td>66</td>
+                <td>36</td>
+                <td>86</td>
+                <td>86</td>
+            </tr>
+            <tr>
+                <td>65</td>
+                <td>47</td>
+                <td>76</td>
+                <td>45</td>
+                <td>76</td>
+                <td></td>
+            </tr>
+        </table><br>
+        <script>
+            var elems = document.getElementsByTagName('td');
+            for(var i = 0; i < elems.length; i++) {
+                elems[i].addEventListener('click', editing);
+            }
+
+            function editing() {
+                var inp = document.createElement('input');
+                inp.value = this.innerHTML;
+                this.innerHTML = '';
+                this.appendChild(inp);
+
+                var btn = document.createElement('button');
+                btn.innerHTML = 'сохранить';
+                btn.addEventListener('click', save)
+                this.appendChild(btn);
+                
+                this.removeEventListener('click',editing);
+            }
+
+            function save() {
+                var crap = this.parentNode;
+                var inp  = this.previousSibling;
+                crap.innerHTML = inp.value;                
+            }
+        </script>
+    </body>
+</html>

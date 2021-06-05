@@ -1,0 +1,185 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>Java Script</title>
+    </head>
+    <style>
+		html, body {
+			margin: 0;
+			height: 100%;
+		}
+		#modalwin {
+			position: fixed;
+			overflow: auto;
+			z-index: 9999999999;
+			background-color: #fff;
+			border: 1px solid #999;
+			border: 1px solid rgba(0,0,0,.2);
+			outline: 0;
+			padding: 25px;
+			display: none;
+			border-radius: 6px;
+			background-clip: padding-box;
+			-webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
+			box-shadow: 0 5px 15px rgba(0,0,0,.5);
+			transition: opacity .25s ease-out .2s;
+		}
+		#exit {
+			margin-top: -4px;
+			padding: 0;
+			cursor: pointer;
+			background: 0 0;
+			border: 0;
+			font-size: 21px;
+			font-weight: 700;
+			line-height: 1;
+			color: #000;
+			text-shadow: 0 1px 0 #fff;
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			opacity: .2;
+			-webkit-appearance: none;
+		}
+		#exit:hover {
+			opacity: .5;
+		}
+		#exit:after {
+			content: '×';
+		}
+    </style>
+	<body>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <p>
+            Test Text
+        </p><p>Test Text</p><p>Test Text</p><p>Test Text</p><p>Test Text</p>
+        <div id="modalwin">
+            <div id="exit"></div>
+            Привет!
+        </div>
+
+        <script>
+            var modalwin = document.getElementById('modalwin');
+            var exit = document.getElementById('exit');
+            var created = false;
+            var N = 1000 //При какой прокрутки показывать попап
+
+            window.addEventListener('scroll', show);
+            exit.addEventListener('click', hide);
+
+            function show() {
+                if (pageYOffset > N - 100 && pageYOffset < N + 100 && !created) {
+                    modalwin.style.display = 'block';
+                    modalPosition();
+                    created = true;
+                }
+            }
+
+            function hide() {
+                modalwin.style.display = 'none';
+            }
+
+            window.addEventListener('resize', modalPosition);
+
+            function modalPosition() {
+                if (modalwin.style.display !== 'none') {
+                    var b = document.body;
+                    modalwin.style.left = (b.offsetWidth - modalwin.offsetWidth) / 2 + 'px';
+                    modalwin.style.top = (b.offsetHeight - modalwin.offsetHeight) / 2 + 'px';
+                }	
+            }
+        </script>
+    </body>
+</html>

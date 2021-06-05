@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>Это заголовок тайтл</title>
+	</head>
+	<body>
+        <div>Lorem ipsum dolor</div>
+        <div>sit amet, consectetur adipisicing</div>
+        <div>debitis voluptate eos </div>
+        <button>Обрезать</button>  
+
+        <script>
+            var texts = document.querySelectorAll('div'); 
+            var but   = document.querySelector('button');
+            
+            but.addEventListener('click', func); // EventTarget.addEventListener() // addEventListener() объекта EventTarget позволяет зарегистрировать обработчик событий определенного типа для конкретной цели.
+
+            function func() {
+                for(let i = 0; i < texts.length; i++) {
+                    if(texts[i].innerHTML.length > 10) {
+                        var str = texts[i].innerHTML.substr(0, 9) + '...';
+                        texts[i].innerHTML = str;
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

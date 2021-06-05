@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>Это заголовок тайтл</title>
+        <style>
+
+        </style>
+    </head>
+	<body>
+        <input type="text" id="num" value="" placeholder="Введите чило">
+        <script>
+            var num = document.getElementById('num'); // document.getElementById() // document.getElementById() объекта Document возвращает объект Element, представляющий из себя элемент, глобальный атрибут id которого соответствует указанной строке.
+            num.addEventListener('mouseout', func);   // EventTarget.addEventListener() // addEventListener() объекта EventTarget позволяет зарегистрировать обработчик событий определенного типа для конкретной цели.
+
+            function func() {
+                var x = num.value;
+                if(x <= 100 && x >= 1)
+                    num.style.borderColor = 'green';
+                else
+                    num.style.borderColor = 'red';
+            }
+        </script>
+    </body>
+</html>

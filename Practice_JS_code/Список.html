@@ -1,0 +1,61 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>Это заголовок тайтл</title>
+        <style>
+            td, input, button {
+                width: 100px;
+                text-align: center;
+            }
+        </style>
+    </head>
+	<body>
+        <ul>
+            <li>
+            <p>asda</p>
+            <ul hidden>
+                <li>adfa</li>
+                <li>adfa</li>
+                <li>adfa</li>
+                <li>adfa</li>
+            </ul>
+            </li>
+            <li>
+            <p>asda</p>
+            <ul hidden>
+                <li>adfa</li>
+                <li>adfa</li>
+                <li>adfa</li>
+                <li>adfa</li>
+            </ul>
+            </li>
+            <li>
+            <p>asda</p>
+            <ul hidden>
+                <li>adfa</li>
+                <li>adfa</li>
+                <li>adfa</li>
+                <li>adfa</li>
+            </ul>
+            </li>
+        </ul>      
+        <script>
+            var country = document.querySelectorAll('p');
+            for(var i = 0; i < country.length; i++) {
+                country[i].addEventListener('click', show);
+            }
+
+            function show() {
+                this.nextElementSibling.style.display = 'block';
+                this.removeEventListener('click', show);
+                this.addEventListener('click', hide);
+            }
+
+            function hide(){
+                this.nextElementSibling.style.display = 'none';
+                this.removeEventListener('click', hide);
+                this.addEventListener('click', show);
+            }
+        </script>
+    </body>
+</html>

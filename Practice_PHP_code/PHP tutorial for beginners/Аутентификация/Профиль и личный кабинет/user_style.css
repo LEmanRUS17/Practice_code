@@ -1,0 +1,72 @@
+*, *:after, *:before { /* after: Псевдоэлемент, который используется для вывода желаемого текста после содержимого элемента, к которому он добавляется. */
+                       /* before: Псевдоэлемент :before применяется для отображения желаемого контента до содержимого элемента, к которому он добавляется. */
+    box-sizing: border-box;      /* Применяется для изменения алгоритма расчета ширины и высоты элемента. */
+    padding:    0;               /* Устанавливает значение полей вокруг содержимого элемента. */
+    margin:     0;               /* Устанавливает величину отступа от каждого края элемента. */
+}
+html {
+    height: 100%;
+}
+body {
+    display:        flex;
+    flex-direction: column;
+    height:         100%;
+}
+header {
+    /* Высота «шапки» должна быть статичной и занимать столько места сколько ей нужно*/
+    /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+    flex: 0 0 auto;
+}
+.main-content {
+    /* Установим значение flex-grow равным 1, чтобы основное содержимое занимало все оставшееся место на странице. У остальных элементов flex-grow: 0, потому что их высота статична. */
+    /* 1 flex-grow, 0 flex-shrink, auto flex-basis */
+    flex: 1 0 auto;
+}
+footer {
+    /* «Подвал» также как и «шапка» имеет статичную высоту, он не должен увеличиваться или уменьшаться*/
+    /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+    flex: 0 0 auto;
+}
+
+header, nav, main, aside, section, footer {
+    border:  1px solid black;
+    padding: 10px;
+    margin:  10px;    
+}
+
+li {
+    list-style-type: none;
+}
+	
+.contact_form ul {
+    width:750px;
+    list-style-type:none;
+    list-style-position:outside;
+    margin:0px;
+    padding:0px;
+}
+.contact_form li{
+    padding:12px;
+    border-bottom:1px solid #eee;
+    position:relative;
+}
+.contact_form li:first-child, .contact_form li:last-child {
+    border-bottom:1px solid #777;
+}
+.contact_form label {
+    width:150px;
+    margin-top: 3px;
+    display:inline-block;
+    padding:3px;
+}
+.contact_form input {
+    height:25px;
+    width:220px;
+    padding:1px 8px;
+    vertical-align: middle;
+
+}
+.contact_form textarea {
+    padding:8px;
+    width:300px;
+}

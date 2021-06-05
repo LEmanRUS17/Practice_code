@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>Это заголовок тайтл</title>
+        <style>
+
+        </style>
+    </head>
+	<body>
+        <input id="start" type="number" value="100" placeholder="Введите число">
+        <p id="countdown"></p>
+        <script>
+            var start     = document.getElementById('start');     // document.getElementById() // document.getElementById() объекта Document возвращает объект Element, представляющий из себя элемент, глобальный атрибут id которого соответствует указанной строке.
+            var countdovn = document.getElementById('countdown'); // document.getElementById() // document.getElementById() объекта Document возвращает объект Element, представляющий из себя элемент, глобальный атрибут id которого соответствует указанной строке.
+            start.addEventListener('mouseout', func);             // EventTarget.addEventListener() // addEventListener() объекта EventTarget позволяет зарегистрировать обработчик событий определенного типа для конкретной цели.
+
+            function func() {
+                countdovn.innerHTML = start.value;
+                window.funcId       = window.setInterval(timer, 1000); // WindowOrWorkerGlobalScope.setInterval() // setInterval() объекта WindowOrWorkerGlobalScope многократно вызывает функцию или выполняет фрагмент кода с фиксированной задержкой времени между каждым вызовом.
+            }
+
+            function timer() {
+                 countdovn.innerHTML--;
+                 if(countdovn.innerHTML <= 0) {
+                    window.clearInterval(window.funcId); // WindowOrWorkerGlobalScope.clearInterval() // clearInterval() объекта WindowOrWorkerGlobalScope отменяет повторяющееся выполнение программного кода, которое было ранее установлено вызовом метода setInterval().
+                 }
+            }
+
+
+        </script>
+    </body>
+</html>

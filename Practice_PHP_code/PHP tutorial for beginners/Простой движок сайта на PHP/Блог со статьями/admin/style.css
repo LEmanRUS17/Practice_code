@@ -1,0 +1,47 @@
+*, *:after, *:before { /* after: Псевдоэлемент, который используется для вывода желаемого текста после содержимого элемента, к которому он добавляется. */
+    /* before: Псевдоэлемент :before применяется для отображения желаемого контента до содержимого элемента, к которому он добавляется. */
+box-sizing: border-box;      /* Применяется для изменения алгоритма расчета ширины и высоты элемента. */
+padding:    0;               /* Устанавливает значение полей вокруг содержимого элемента. */
+margin:     0;               /* Устанавливает величину отступа от каждого края элемента. */
+transition: .5s ease-in-out; /* добавим плавность переходов для всех элементов страницы*/
+                             /* Универсальное свойство, которое позволяет одновременно задать значения transition-property, transition-duration, transition-timing-function и transition-delay. */
+}
+
+main table td, main table th {
+    border: 1px solid black;  /* Универсальное свойство border позволяет одновременно установить толщину, стиль и цвет границы вокруг элемента */
+    padding: 10px;              /* Устанавливает значение полей вокруг содержимого элемента */
+}
+
+.success {
+    color: green; /* Определяет цвет текста элемента */
+}
+.error {
+    color: red; /* Определяет цвет текста элемента */
+}
+
+header, nav, main, footer {
+    border:  1px solid red;
+    margin:  5px;
+    padding: 5px;
+}
+
+html {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+header {
+    /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+    flex: 0 0 auto;
+}
+.main-content{
+/* 1 flex-grow, 0 flex-shrink, auto flex-basis */
+    flex: 1 0 auto;
+}
+footer {
+    /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+    flex: 0 0 auto;
+}

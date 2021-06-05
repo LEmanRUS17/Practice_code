@@ -1,0 +1,77 @@
+*, *:after, *:before { /* after: Псевдоэлемент, который используется для вывода желаемого текста после содержимого элемента, к которому он добавляется. */
+                       /* before: Псевдоэлемент :before применяется для отображения желаемого контента до содержимого элемента, к которому он добавляется. */
+    box-sizing: border-box;      /* Применяется для изменения алгоритма расчета ширины и высоты элемента. */
+    padding:    0;               /* Устанавливает значение полей вокруг содержимого элемента. */
+    margin:     0;               /* Устанавливает величину отступа от каждого края элемента. */
+    transition: .5s ease-in-out; /* добавим плавность переходов для всех элементов страницы */
+                                 /* Универсальное свойство, которое позволяет одновременно задать значения transition-property, transition-duration, transition-timing-function и transition-delay. */
+}
+html {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+header {
+    /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+    flex: 0 0 auto;
+}
+.main-content{
+/* 1 flex-grow, 0 flex-shrink, auto flex-basis */
+    flex: 1 0 auto;
+}
+main {
+    display: flex;
+    justify-content: space-between;
+}
+aside {
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+    min-width: 180px;
+}
+aside a {
+    margin: 0 5px;
+    color: blue;
+    text-decoration: none;
+}
+aside a.active {
+    text-decoration: underline;
+    }
+section {
+    flex-grow: 1;
+    flex-direction: column;
+    min-width: 300px;
+}
+footer {
+    /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+    flex: 0 0 auto;
+}
+
+header, nav, main, aside, section, footer {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;    
+}
+
+/*---------------------------*/
+.heading {
+    text-align: right;
+}
+.text {
+    text-align: justify;
+}
+.footerArticle {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+.data {
+    color: cadetblue;
+    font-size: 10px;    
+}
+.author {
+    font-size: 18px;
+}

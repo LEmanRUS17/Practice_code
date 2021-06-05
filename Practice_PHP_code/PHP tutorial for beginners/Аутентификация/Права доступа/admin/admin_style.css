@@ -1,0 +1,46 @@
+*, *:after, *:before { /* after: Псевдоэлемент, который используется для вывода желаемого текста после содержимого элемента, к которому он добавляется. */
+    /* before: Псевдоэлемент :before применяется для отображения желаемого контента до содержимого элемента, к которому он добавляется. */
+    box-sizing: border-box;      /* Применяется для изменения алгоритма расчета ширины и высоты элемента. */
+    padding:    0;               /* Устанавливает значение полей вокруг содержимого элемента. */
+    margin:     0;               /* Устанавливает величину отступа от каждого края элемента. */
+}
+html {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+header {
+    /* Высота «шапки» должна быть статичной и занимать столько места сколько ей нужно*/
+    /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+    flex: 0 0 auto;
+}
+.main-content {
+    /* Установим значение flex-grow равным 1, чтобы основное содержимое занимало все оставшееся место на странице. У остальных элементов flex-grow: 0, потому что их высота статична. */
+    /* 1 flex-grow, 0 flex-shrink, auto flex-basis */
+    flex: 1 0 auto;
+}
+footer {
+    /* «Подвал» также как и «шапка» имеет статичную высоту, он не должен увеличиваться или уменьшаться*/
+    /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+    flex: 0 0 auto;
+}
+
+table th, td {
+    text-align: center;
+    padding: 10px;
+}
+.admin td{
+    color: green;
+}
+.user td{
+    color: red;
+}
+header, nav, main, aside, section, footer {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;    
+}
+
